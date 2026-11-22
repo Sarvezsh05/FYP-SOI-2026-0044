@@ -1,0 +1,25 @@
+# Protected presentation configuration; real MySQL and S3 require an IAM role.
+# Keep all website/API ports bound to host loopback and open by SSH tunnel.
+services:
+  cloudvault:
+    build: .
+    env_file:
+      - .env
+    environment:
+      LAB_MODE: 'false'
+      HOST: '0.0.0.0'
+      PORT: '3000'
+      API_PORT: '8000'
+    ports:
+      - '127.0.0.1:3000:3000'
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped

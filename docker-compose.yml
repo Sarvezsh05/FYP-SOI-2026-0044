@@ -1,0 +1,29 @@
+# For an Ubuntu PRIVATE lab only. Never publish to a public IP.
+services:
+  cloudvault:
+    build: .
+    environment:
+      PORT: '3000'
+      API_PORT: '8000'
+      HOST: '0.0.0.0'
+      CLOUDVAULT_CONTAINER: '1'
+      LAB_MODE: 'true'
+      USE_MYSQL: 'false'
+      STORAGE_MODE: 'local'
+    ports:
+      - '127.0.0.1:3000:3000'
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - isolated_lab
+networks:
+  isolated_lab:
+    internal: true

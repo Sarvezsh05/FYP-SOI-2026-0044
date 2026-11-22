@@ -1,0 +1,21 @@
+node_modules/
+data/
+logs/*.jsonl
+.env
+*.pem
+.DS_Store
+
+# Never commit real credentials, local databases, or private uploads
+.env.*
+!.env.example
+!.env.filess.example
+!.env.s3.example
+*.db
+*.sqlite*
+*.zip
+*.backup
+*.bak
+*.log
+*.key
+*.p12
+.aws/
