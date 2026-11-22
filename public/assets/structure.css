@@ -1,0 +1,79 @@
+/* CloudVault original multi-section layout. Designed for CloudVault, not copied from the example project. */
+:root {
+  --structure-accent: #8c79dc;
+}
+/* Consistent workspace navigation and distinct role/section grouping. */
+.sidebar { overflow-y: auto; scrollbar-width: thin; scrollbar-color: #574b78 transparent; }
+.sidebar .nav-heading { margin-top: 5px; }
+.sidebar .nav-list { margin-bottom: 21px; }
+.sidebar .nav-item { min-height: 42px; }
+.sidebar .nav-item:focus-visible { outline: 2px solid #d5c1fa; outline-offset: 2px; }
+.sidebar-bottom { margin-top: auto; padding-top: 16px; }
+.topbar { min-height: 83px; }
+.top-identity { flex: 0 0 auto; min-width: 135px; display: flex; flex-direction: column; gap: 3px; }
+.top-identity-label { font-size: 9px; font-weight: 800; letter-spacing: 1.1px; color: #a59bb7; }
+.top-identity strong { font-size: 14px; font-weight: 820; color: #44375a; }
+.topbar .top-search { flex: 1 1 220px; max-width: 375px; }
+.workspace-intro { display:flex; justify-content:space-between; align-items:center; gap:18px; padding:23px 27px; background:var(--panel); border:1px solid var(--line); border-radius:19px; margin-bottom:18px; box-shadow:var(--shadow); }
+.intro-kicker { color:#9477cf; font-size:10px; letter-spacing:1.5px; font-weight:850; }
+.workspace-intro h2 { font-size:20px; letter-spacing:-.7px; margin:4px 0 5px; color:var(--ink); }
+.workspace-intro p { margin:0; font-size:12px; color:var(--muted); }
+.intro-quick-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.admin-summary-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-bottom:21px; }
+.admin-summary-card { background:var(--panel); border:1px solid var(--line); border-radius:17px; padding:20px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:5px; }
+.admin-summary-card span { font-size:11px; color:#9187a2; font-weight:750; }
+.admin-summary-card strong { font-size:29px; letter-spacing:-1px; color:var(--ink); line-height:1.3; }
+.admin-summary-card small { font-size:10px; color:#a59ab0; }
+.activity-timeline { list-style:none; margin:0; padding:18px 27px; }
+.activity-event { display:flex; gap:15px; position:relative; padding:13px 0 18px; }
+.activity-event:not(:last-child)::before { content:""; position:absolute; left:15px; top:44px; bottom:-7px; width:1px; background:var(--line); }
+.activity-event-icon { display:grid; place-items:center; flex:0 0 31px; height:31px; border-radius:50%; background:#f0eafa; color:#8a65cb; font-size:19px; }
+.activity-event strong { display:block; font-size:13px; color:var(--ink); }
+.activity-event p { margin:3px 0; color:var(--ink2); font-size:12px; overflow-wrap:anywhere; }
+.activity-event time { color:var(--muted); font-size:10px; }
+[data-theme="dark"] .top-identity strong { color:#eae1f7; }
+[data-theme="dark"] .top-identity-label { color:#a89abf; }
+[data-theme="dark"] .workspace-intro, [data-theme="dark"] .admin-summary-card { background:#211d30; border-color:#39344d; }
+[data-theme="dark"] .workspace-intro h2, [data-theme="dark"] .admin-summary-card strong, [data-theme="dark"] .activity-event strong { color:#f1eaff; }
+[data-theme="dark"] .intro-kicker { color:#d4b9ff; }
+[data-theme="dark"] .admin-summary-card span, [data-theme="dark"] .admin-summary-card small { color:#afa2c0; }
+[data-theme="dark"] .activity-event p { color:#c5b8da; }
+[data-theme="dark"] .activity-event-icon { background:#3e3153; color:#e0c5fa; }
+@media (max-width:1250px) { .top-identity-label { display:none; } .admin-summary-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:1020px) { .top-identity { display:none; } .workspace-intro { align-items:flex-start; flex-direction:column; } }
+@media (max-width:610px) { .admin-summary-grid {gap:9px;} .admin-summary-card {padding:15px;} .workspace-intro {padding:18px;} .intro-quick-actions {width:100%;} .intro-quick-actions button {flex:1;} .activity-timeline {padding:12px 18px;} }
+
+/* File-management actions added to the structured workspace */
+.folder-menu{display:flex;gap:10px;flex-wrap:wrap}.folder-menu button,.revoke-access{border:1px solid var(--line,#c6c1d2);background:var(--surface,#fff);color:var(--text,#24212e);border-radius:8px;padding:8px 11px;cursor:pointer}.share-recipient{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px;border-bottom:1px solid var(--line,#c6c1d2)}.danger-outline{border-color:#d16b75!important;color:#c64b5a!important}
+/* The file management controls must remain readable in both appearance modes. */
+[data-theme="dark"] .folder-menu button,
+[data-theme="dark"] .revoke-access {
+  background:#30283f;color:#ecdefa;border-color:#534368;
+}
+[data-theme="dark"] .folder-menu button:hover,
+[data-theme="dark"] .revoke-access:hover {background:#423354}
+
+/* Presentation polish (Nov 2026): remove misleading faux dropdown and duplicate CTAs. */
+.workspace-selector {display:flex;gap:13px;align-items:center;min-width:0;}
+.workspace-selector .workspace-text {flex:1;min-width:0;}
+.workspace-selector .workspace-text strong {display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.workspace-selector #workspaceRole {display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.workspace-live-dot {width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:#b7eece;box-shadow:0 0 0 4px #b7eece20;}
+/* The dashboard banner is now a useful summary, rather than another action card. */
+.welcome-hero .hero-main-action {display:inline-flex;gap:12px;align-items:center;text-align:center;}
+.welcome-hero .hero-main-action:focus-visible {outline:3px solid #ede5ff;outline-offset:4px;}
+.workspace-health-card {position:absolute;right:4%;top:50%;transform:translateY(-50%) rotate(3deg);width:250px;max-width:94%;padding:23px 23px 20px;border-radius:22px;background:#fffefa;color:#372951;box-shadow:0 25px 65px #2613474f;border:1px solid #ffffffb0;}
+.health-label {display:flex;align-items:center;gap:9px;color:#817198;font-size:10px;letter-spacing:1.5px;font-weight:850;}
+.health-icon {display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:#f2eaff;color:#8e70d1;font-size:20px;}
+.workspace-health-card strong {display:block;margin:19px 0 1px;font-size:32px;line-height:1.1;font-weight:820;letter-spacing:-1.2px;}
+.workspace-health-card small {font-size:12px;color:#8a8099;}
+.health-track {width:100%;height:8px;background:#ece5f6;border-radius:99px;overflow:hidden;margin-top:19px;}
+.health-fill {height:100%;border-radius:99px;background:linear-gradient(90deg,#9b80e4,#6c4ce1);}
+.health-meta {display:flex;justify-content:space-between;gap:8px;margin-top:11px;color:#857995;font-size:10px;font-weight:750;}
+/* Make both primary buttons balanced and keyboard accessible. */
+.page-header-actions button {min-height:44px;}
+.page-header-actions .primary-btn {box-shadow:0 9px 22px #684cbe26;}
+.page-header-actions button:focus-visible,.nav-item:focus-visible,.user-button:focus-visible {outline:3px solid #bda7ef;outline-offset:3px;}
+@media (max-width:1100px){.workspace-health-card{right:0;width:215px;padding:19px}.hero-copy{max-width:63%}.hero-visual{right:3%;width:34%;}}
+@media (max-width:800px){.workspace-health-card{width:190px;right:0;padding:16px}.workspace-health-card strong{font-size:25px}}
+@media (max-width:610px){.workspace-health-card{display:none}.hero-copy{max-width:100%}.hero-visual{display:none}.welcome-hero{min-height:auto;padding:30px 25px}.welcome-hero h2{font-size:30px}.hero-actions{margin-top:18px}}
